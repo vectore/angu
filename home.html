@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+    <script type="application/javascript" src="angular.js"></script>
+    <script type="application/javascript" src="angular-resource.js"></script>
+    <script type="application/javascript" src="app.js"></script>
+    <script type="application/javascript" src="services.js"></script>
+
+    <title></title>
+</head>
+<body class="content" ng-app="CoreApp" ng-controller="MainController as main">
+    <div>{{ name }} App version is  <span ng-bind="appVersion"></span></div>
+    <br/>
+    <div>{{main.controllerName}}</div><br/>
+
+    <input type="text" ng-bind="appVersion" /><br/>
+
+    <button ng-click="showUsers()"> get users </button>
+    <div>
+        <ul>
+            <li ng-repeat="user in users">
+                {{ user.id }}
+            </li>
+        </ul>
+    </div>
+    <input type="text" ng-model="currentUserId" />
+    <button ng-click="showUser()">show current user</button>
+    <div>
+        {{ currentUser.name }}
+    </div>
+
+    <div>
+        {{ message }}
+    </div>
+
+    <form class="horizonatl-form">
+        <input type="button" ng-click="sendHello()"  value="say hello"/>
+    </form>
+
+
+
+
+    <div class="user-info" ng-controller="UserController as userCtrl">
+        <div>Name of parent controller : {{ main.controllerName}}</div>
+        <br/>
+        <div>Please input name for current controller: <input type="text" ng-model="controllerName" /> </div><br/>
+
+        <div>Name of current controller: {{controllerName}}</div></br>
+
+        <div> Name in UserController : {{name}} </div>
+        <div user-info my-name="controllerName">
+            <button> trnasluded!</button>
+        </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+        var single = (function(){
+
+            var instance = undefined;
+
+            function createInstance(){
+                instance = {};
+                instance.name = 'SuperSingle';
+                instance.showName = function(){
+                    console.log(instance.name);
+                }
+            }
+
+            return{
+                getInstance: function(){
+                    if(!instance){
+                        createInstance();
+                    }
+                    return instance;
+
+                }
+
+            }
+
+        })();
+
+
+    </script>
+</body>
+
+</html>
